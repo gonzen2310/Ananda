@@ -1,0 +1,11 @@
+Control statement to cause the flow of execution to advance and branch based on changes
+to the state of a program
+JAVA's program control statements can be put into 3 categories:
+- SELECTION
+    * Allow programs to choose different paths
+    * (if, ternary, switch)
+- ITERATION
+    * Enable program execution to repeat one or more statements
+    * Loops (for, do-while, while)
+- JUMP
+    * Allows your program to execute in a nonlinear fashion
