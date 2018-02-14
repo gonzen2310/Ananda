@@ -1,0 +1,69 @@
+The most important thing to understand about a class is that it defines a new
+DATA TYPE
+    * Once defined, this new type can be used to create objects of that type
+A CLASS is a TEMPLATE for an OBJECT
+An OBJECT is and INSTANCE of a CLASS
+
+!!OBJECT and INSTANCE are used interchangeably
+
+When you declare a class, you declare its exact form and nature
+You do this by specifying the DATA that it contains and the CODE that operates
+on that DATA.
+A class's CODE defines the interface to its data
+
+General Form:
+    class classname {
+        type instance-variable1;
+        type instance-variable2;
+        // ...
+        type instance-variableN;
+
+        type methodname1(parameter-list) {
+            // body of method
+        }
+        type methodname2(parameter-list) {
+            // body of method
+        }
+        // ...
+        type methodnameN(parameter-list) {
+            // body of method
+        }
+    }
+* The DATA (VARIABLES) defined within a CLASS are called INSTANCE VARIABLES
+* The CODE is contained within METHODS
+* METHODS and VARIABLES defined within a class are called MEMBERS OF THE CLASS
+
+GENERAL RULE:
+It is the METHODS that determine how a class' data can be used
+
+VARIABLES defined within a class are called instance variables because each instance
+of the CLASS (that is, each OBJECT of the class) contains its own copy of these variables
+    * Thus, the data for one object is separate and unique from the data for another
+
+Java CLASSES do not need to have a main( ) method. You only specify one if that CLASS
+is the starting point for your program. Further, some kinds of Java applications,
+such as applets, don’t require a main( ) method at all.
+
+!!IMPORTANT TO REMEMBER: A CLASS declaration only creates a template, it does not
+CREATE and actual OBJECT
+
+When you create a class, you are creating a NEW DATA TYPE
+    - You can use this type to declare objects of that type
+    - However, obtaining object of a class is a two-step process.
+        1. Must declare a variable of the class type
+        2. Must acquire an actual, physical copy of the object and assign it to that
+           variable (You can do this using NEW)
+The NEW operator dynamically allocates (that is, allocates at run time) memory
+for an OBJECT and returns a REFERENCE to it.
+    - This REFERENCE is, more or less, the address in memory of the object allocated
+      by NEW. This REFERENCE is then stored in the variable
+    - In Java, all class objects must be dynamically allocated
+
+CLASS: Logical Constructor
+OBJECT: Has physical reality (Occupies space in memory)
+
+PARAMETER: Variable defined by a method that receives a value when the method is called
+ARGUMENT: Is a value that is passed to a method when it is invoked
+
+!! In well-designed Java programs, INSTANCE VARIABLES should be accessed only through
+METHODS defined by their CLASS
