@@ -1,0 +1,11 @@
+* Java includes a feature that simplifies the creation of methods the need to take a
+variable number of arguments ==> varargs (variable-length arguments)
+* A METHOD that takes a VARIABLE NUMBER of arguments is call a VARIABLE-ARITY METHOD
+or simple VARARGS METHOD
+* Situation that require that a variable number of arguments be passes to a METHOD:
+    - METHOD that opens anInternet connection (name, passwrd, filename, protocols, etc)
+        * Would be convenient to pass only arguments to which the default did not apply
+    - printf() method
+* PREVIOUS ALTERNATIVES TO VARARGS:
+    - Method overloading (For narrow situations)
+    - Passing argument through an array (Tedious process / Error-prone)

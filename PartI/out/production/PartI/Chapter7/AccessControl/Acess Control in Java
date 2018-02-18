@@ -1,0 +1,24 @@
+ENCAPSULATION
+- Links DATA with the CODE that manipulates it.
+- However, it provides another important attribute: ACCESS CONTROL
+- You can control what parts of a program can ACCESS the members of a class
+    - This prevents misuse of that data
+
+- When correctly implemented, a class create a "BLACK BOX" which may be used, but
+  the inner workings of which are not open to tampering
+
+ACCESS MODIFIERS:
+- Determines how a member can be accessed
+- PACKAGE: Grouping of CLASSES
+- Java's access modifiers: PUBLIC - PRIVATE - PROTECTED(Inheritance) - DEFAULT ACCESS
+* PUBLIC:
+    - The member can be accessed by any other code
+    - E.g. main()
+* PRIVATE:
+    - The member can only be accessed by other members of ITS class
+!! WHEN NO ACCESS MODIFIER IS USED, THEN BY DEFAULT THE MEMBER OF A CLASS IS PUBLIC
+WITHIN ITS OWN "PACKAGE", BUT CANNOT BE ACCESS OUTSIDE ITS PACKAGE"
+
+- Usually you want to restrict access to the data member of a class - Allowing access
+  only through methods
+- ACCESS MODIFIERS must precede the rest of a member's type specification.

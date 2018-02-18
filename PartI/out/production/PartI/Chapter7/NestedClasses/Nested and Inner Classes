@@ -1,0 +1,25 @@
+It is possible to define a CLASS within another CLASS ==> NESTED CLASSES
+The SCOPE of a NESTED CLASS is bounded by the scope of its ENCLOSING CLASS
+    - Thus, if class B is defined within class A, then B does not exist
+      independently of A.
+A NESTED CLASS has access to the members, including PRIVATE members, of the CLASS
+in which it is nested.
+    - However, the enclosing CLASS does not have access to the members of its
+      enclosing CLASS.
+    - It is possible to declare a nested CLASS that is local to a block
+There are two types of nested classes: STATIC and NON-STATIC
+- STATIC CLASS:
+    * Has the STATIC modifier applied
+    * Must access the NON-STATIC members of its enclosing class through an object
+    * Cannot refer to non-static members of its enclosing class directly
+    * Are SELDOM used
+- INNER CLASS:
+    * Most important type of nested class
+    * Is a NON-STATIC NESTED CLASS
+    * Has access to all of the VARIABLES and METHODS of its OUTER CLASS
+    * May refer to them (var and methods) directly
+
+- An inner class has access to ALL of the MEMBERS of its enclosing class, but
+the REVERSE is NOT TRUE. Members of the INNER CLASS are known only within the
+scope of the INNER CLASS and may not be used by the outer class.
+- It is possible to define inner classes within any block scope.

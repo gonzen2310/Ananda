@@ -1,0 +1,62 @@
+A Closer Look at Methods and Classes
+
+*** METHOD OVERLOADING***
+- In Java is possible to define two or more methods within the same class
+that share the same name, as long as their parameter declarations are different
+- One of the ways Java supports POLYMORPHISM
+- OVERLOADED methods mush differ in TYPE and/or NUMBER OF THEIR PARAMETERS
+- The return type alone is insufficient to distinguish two version of a method
+- When Java encounters a call to an overloaded method, it simply executes the version
+of the method whose parameters match the arguments used in the call
+- RETURN TYPES do not play a role in overload resolution
+- In some cases, Java's automatic type conversions can play a role in overload resolution
+- Java will employ its automatic type conversions only if no exact match if found
+- It supports polymorphism because it is one way that Java implements the
+"one interface, multiple methods" paradigm
+- The value of overloading is that it allows related methods to be accessed by used of
+a common name
+- From a stylistic point of view, method overloading implies a relationship
+- YOU SHOULD ONLY OVERLOAD CLOSELY RELATED OPERATIONS
+- You can also OVERLOAD CONSTRUCTORS
+    * For most real-world classes that you create, overloaded constructors will be the
+      norm, not the exception
+
+ARGUMENT PASSING
+- Two ways:
+    1. call-by-value
+    2. call-by-reference
+- CALL-BY-VALUE:
+    - COPIES the value of an ARGUMENT into the formal PARAMETER
+    - Changes made to the parameter of the subroutine HAVE NO EFFECT on the ARGUMENT
+- CALL-BY-REFERENCE:
+    - REFERENCE to an ARGUMENT (not the value of the argument) is passed to the
+      PARAMETER
+    - Inside the subroutine, this reference is used to access the actual ARGUMENT
+      specified by the call
+    - Changes made to the parameter WILL AFFECT the ARGUMENT used to call the
+      subroutine.
+
+    It is important to keep the two terms PARAMETER and ARGUMENT straight.
+        A PARAMETER is variable defined by a method that receives a value when
+        the method is called.
+        An ARGUMENT is a value that is passed to a method when it is invoked.
+
+- Java uses CALL-BY-VALUE to pass arguments however, the precise effect differs between
+  whether a PRIMITIVE TYPE or a REFERENCE TYPE (Object) is passed.
+
+- Method can return any type of data, including CLASS types
+
+RECURSION:
+- It is the attribute that allows a method to call itself (RECURSIVE METHOD)
+- When a method calls itself, new local variables and parameters are allocated storage
+  on the STACK, and the method code is executed with these new variables from the start.
+  As each recursive call return, the old local variables and parameters are removed from
+  the STACK, and execution resumes at the point of the call inside the method.
+- Recursive versions of many routines may execute a bit more slowly and the iterative
+  equivalent  because of the added overhead of the additional method call
+- Many recursive calls to a method could cause a STACK OVERRUN
+- MAIN ADVANTAGE: Can be used to create cleared and simpler versions of several algorithms than
+  can their iterative relatives (e.g. QuickSort sorting algorithm, AI-related algorithms)
+- When writing recursive methods, you must have an if statement somewhere to force the
+  method to return without the recursive call being executed. If you don’t do this, once you
+  call the method, it will never return

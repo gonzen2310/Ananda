@@ -1,0 +1,6 @@
+- Sometimes you want to pass information into a program when you run it
+- This is accomplished by passing COMMAND-LINE ARGUMENTS to main().
+- A CLA is the information that directly follows the program's name on the command line
+when it is executed
+- To access the CMA inside a Java program is quite easy => They are stored as STRINGS
+  in a STRING ARRAY passed to args parameter of main()
