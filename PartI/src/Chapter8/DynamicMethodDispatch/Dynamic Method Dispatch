@@ -1,0 +1,23 @@
+DYNAMIC METHOD DISPATCH
+-   METHOD OVERRIDING forms the basis for one of Java's most powerful concepts
+    "DYNAMIC METHOD DISPATCH"
+-   "DYNAMIC METHOD DISPATCH" is the mechanism by which a call to an overridden
+    method is resolved at RUN TIME, rather than compile time.
+        - This is how Java implements run-time polymorphism
+-   !! REMEMBER !! A SUPERCLASS REFERENCE VARIABLE CAN REFER TO A SUBCLASS OBJECT
+        - Java uses this fact to resolve calls to overridden methods at run time
+        * When an overridden method is called through a SUPERCLASS reference, Java
+          determines which version of the method to execute based upon the type of
+          the object being referred to at the time the call occurs.
+          (This determination is made at runtime)
+        * When different types of OBJECTS are referred to, different versions of an
+          overridden method will be called
+              - IT IS THE TYPE OF THE OBJECT BEING REFERRED TO (not the type of
+                the reference variable) that determines which version of an
+                overridden method will be executed.
+              - If a SUPERCLASS contains a method that is overridden by a SUBCLASS
+                then when different types of objects are referred to through a
+                SUPERCLASS reference variables, different version of the method are
+                executed.
+
+DOESN'T MATTER THE VARIABLE'S TYPE, WHAT MATTERS IS THE INSTANCE'S / OBJECT'S TYPE

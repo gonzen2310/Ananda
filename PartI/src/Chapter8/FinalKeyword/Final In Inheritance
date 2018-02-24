@@ -1,0 +1,15 @@
+METHODS:
+
+There will be times when you will want to prevent a methods to be overridden.
+To disallow a method being overridden, specify the FINAL as a modifier at the start
+of its declaration.
+METHOD DECLARED AS FINAL CANNOT BE OVERRIDDEN
+* Sometimes provide a performance enhancement
+
+CLASSES:
+Use final to prevent Inheritance
+You can declare a CLASS FINAL, preventing it from being inherited.
+Declaring a class as FINAL implicitly declares all of its methods as FINAL too
+IT IS ILLEGAL TO DECLARES A CLASS AS BOTH ABSTRACT AND FINAL SINCE AN ABSTRACT
+CLASS IS INCOMPLETE BY ITSELF AND RELIES UPON ITS SUBCLASSES TO PROVIDE COMPLETE
+IMPLEMENTATIONS

@@ -1,0 +1,20 @@
+There will be times when you will want to create a SUPERCLASS that keeps the
+details of its implementation to itself (keep its DATA member private).
+    - In this case, there would be no way for a SUBCLASS to directly access or
+      initialize theses variables on its own
+* Whenever a SUBCLASS needs to refer to its IMMEDIATE SUBCLASS, it can do so by use
+  of the keyword SUPER
+* SUPER has two general forms
+    1. The first calls the SUPERCLASS' CONSTRUCTOR
+        * super(arg-list);
+            - arg-list specifies any arguments needed by the constructor in
+              the superclass. super() MUST always BE the FIRST statement executed
+              inside a subclass's constructor
+    2. The second is used to access a member of the SUPERCLASS that has been
+       hidden by a member of a subclass.
+       * SUPER acts somewhat like THIS, except that it always refers to the
+         SUPERCLASS of the SUBCLASS in which is used
+       * super.member;
+            - member can be either a METHOD or and INSTANCE VARIABLE
+       * It is most applicable to situations in which member names of a SUBCLASS
+         hide members by the sane name in the superclass

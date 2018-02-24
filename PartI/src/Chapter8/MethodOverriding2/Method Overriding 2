@@ -1,0 +1,17 @@
+WHY OVERRIDDEN METHODS?
+
+* Overridden methods allow Java to support run-time POLYMORPHISM
+* POLYMORPHISM is essential to OOP for one reason:
+    ALLOWS A GENERAL CLASS TO SPECIFY METHODS THAT WILL BE COMMON TO
+    ALL OF ITS DERIVATIVES, WHILE ALLOWING SUBCLASSES TO DEFINE THE
+    SPECIFIC IMPLEMENTATION OF SOME OR ALL OF THOSE METHODS.
+* Overridden methods are another way that Java implements the "one interface,
+  multiple methods"
+* Key to understand POLYMORPHISM: Superclasses and subclasses form a HIERARCHY
+  which moves from lesser to greater specialization. Used correctly, a SUPERCLASS:
+    * Provides all elements that a subclass can use directly.
+    * Defines those METHODS that the derived class must implement on its own.
+        - This allows the SUBCLASS the flexibility to define its own METHODS, yet
+          still enforces a consistent interface
+* Thus, by combining INHERITANCE with OVERRIDDEN methods, a superclass can define
+  the general form of the methods that will be used by all of its subclasses

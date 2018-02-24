@@ -1,0 +1,14 @@
+WHEN CONSTRUCTORS ARE EXECUTED?
+
+- When a class hierarchy is created, in what order are the constructors for the
+  classes that make up the hierarchy executed? For example, given a subclass
+  called B and a superclass called A, is A's constructor executed before B's, or
+  vice versa?
+  * In a class hierarchy, CONSTRUCTORS complete their execution in ORDER OF
+    DERIVATION --> From SUPERCLASS to SUBCLASS
+  * Since super() must be the first statement executed in a SUBCLASS' constructor,
+    this order is the same whether or not super() is used.
+        * If super() is not used, then the default or parameterless
+          constructor of each SUPERCLASS will be executed
+
+
