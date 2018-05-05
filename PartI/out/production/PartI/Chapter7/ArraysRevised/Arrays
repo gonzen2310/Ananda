@@ -1,7 +1,0 @@
-ARRAYS are implemented as OBJECTS
-    - Because of this, there is a special array attribute that you will want
-      to take advantage of ==> array.length;
-
-IMPORTANT: The value of "length" has nothing to do with the number of elements
-that are actually in ue. It only reflects the number of elements that the array
-is designed to hold.

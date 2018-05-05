@@ -1,9 +1,0 @@
-INHERITANCE
-* One of the cornerstones of OOP
-* Allows the creation of hierarchical classifications
-* You can create general class that defines traits common
-  to a set of related items
-* In terminology of Java:
-    1. SUPERCLASS: class that is inherited
-    2. SUBCLASS: class that does the inheriting (specialized version of a SUPERCLASS)
-* To inherit a class, you simply incorporate the definition of one class into another by using EXTENDS
