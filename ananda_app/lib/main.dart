@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 void main() => runApp(new MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: new ThemeData(
         primaryColor: Color.fromRGBO(254, 175, 131, 1.0),
-        primaryColorDark: Color.fromRGBO(246, 126,59, 0.8),
+        primaryColorDark: Colors.deepOrange,
       ),
       home: new MyHomePage(title: 'Ananda Timer'),
     );
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _substractCounter() {
+  void _dicrementCounter() {
     setState(() {
       _counter--;
     });
@@ -57,8 +58,53 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: new Column(
           children: <Widget>[
-            ListTile(
-              title: Text("Time"),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Time",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Color.fromRGBO(255, 128, 58, 1.0),
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                      Text("Intervals",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Color.fromRGBO(255, 128, 58, 1.0),
+                          fontWeight: FontWeight.w500
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(right: 16.0),
+                        child: CircularGradientButton(
+                          child: Icon(Icons.favorite),
+                          callback: (){},
+                          gradient: Gradients.hotLinear,
+                        ),
+                      ),
+                      Container(
+                        child: CircularGradientButton(
+                          child: Icon(Icons.arrow_forward),
+                          callback: (){
+                          },
+                          gradient: Gradients.hotLinear,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
             new Expanded(
                 child: new Container(
@@ -86,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       textColor: Colors.deepOrange,
                                       color: Colors.transparent,
                                       elevation: 0.0,
-                                      onPressed: _substractCounter,
+                                      onPressed: _dicrementCounter,
                                       child: Icon(Icons.remove)
                                   ),
                                   Text(
@@ -117,11 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ]
       ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
