@@ -3,11 +3,9 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'dart:async';
 import 'dart:collection';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
+class IntervalsApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

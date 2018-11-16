@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import './Intervals.dart';
 
 void main() => runApp(new MyApp());
 
@@ -29,6 +30,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _totalTime = 0;
+  final myController = TextEditingController();
+
 
   final List<Map>_savedWorkouts = new List<Map>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -122,23 +125,39 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {
-
-          final Iterable<Row> tiles = _savedWorkouts.map(
+          final Iterable<Container> tiles = _savedWorkouts.map(
                 (Map pair) {
-              return new Row(
-                children: <Widget>[
-              GradientCard(
-                  gradient: Gradients.hotLinear,
+              return Container(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
                   child: Row(
-                      children: <Widget>[
-                        Text(
-                            pair['prepare'].toString(),
-                            style: TextStyle(fontSize: 20.0),
-                        )
-                      ],
-                    )
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                          "WORKOUT"
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            margin: const EdgeInsets.only(right: 16.0),
+                            child: CircularGradientButton(
+                              child: Icon(Icons.delete),
+                              callback: (){},
+                              gradient: Gradients.hotLinear,
+                            ),
+                          ),
+                          CircularGradientButton(
+                            child: Icon(Icons.play_arrow),
+                            callback: (){},
+                            gradient: Gradients.rainbowBlue,
+                          )
+                        ],
+                      ),
+
+                    ],
                   ),
-                ],
+                ),
               );
             },
           );
@@ -170,9 +189,60 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 1),
     );
     _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    myController.dispose();
+    super.dispose();
+  }
+
+  // user defined function
+  void _showDialog() {
+
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Save workout as"),
+          content: TextField(
+            controller: myController,
+            decoration: InputDecoration(
+                  hintText: 'e.g. Workout 1',
+                  icon: Icon(Icons.directions_run)
+            ),
+            maxLength: 24,
+            maxLines: 1,
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Save"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                var copyStats = {
+                  'prepare': _countersMap['prepare'],
+                  'workout': _countersMap['workout'],
+                  'resting': _countersMap['resting'],
+                  'cycles': _countersMap['cycles'],
+                  'sets': _countersMap['sets'],
+                  'restSets': _countersMap['restSets'],
+                  'cooldown': _countersMap['cooldown'],
+                };
+                _savedWorkouts.add(copyStats);
+                _showSnackbar();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -250,8 +320,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: CircularGradientButton(
                           child: Icon(Icons.favorite),
                           callback: (){
-                            _savedWorkouts.add(_countersMap);
-                            _showSnackbar();
+                            _showDialog();
+//                            var copyStats = {
+//                              'prepare': _countersMap['prepare'],
+//                              'workout': _countersMap['workout'],
+//                              'resting': _countersMap['resting'],
+//                              'cycles': _countersMap['cycles'],
+//                              'sets': _countersMap['sets'],
+//                              'restSets': _countersMap['restSets'],
+//                              'cooldown': _countersMap['cooldown'],
+//                            };
+//                            _savedWorkouts.add(copyStats);
+//                            _showSnackbar();
                           },
                           gradient: Gradients.hotLinear,
                         ),
@@ -260,6 +340,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: CircularGradientButton(
                           child: Icon(Icons.arrow_forward),
                           callback: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => IntervalsApp()),
+                            );
                           },
                           gradient: Gradients.hotLinear,
                         ),
