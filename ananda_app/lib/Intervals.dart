@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'dart:async';
-import 'dart:collection';
 
 
 class IntervalsApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
