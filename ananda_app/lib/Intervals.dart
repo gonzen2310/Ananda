@@ -4,52 +4,35 @@ import 'dart:async';
 
 class IntervalsApp extends StatelessWidget {
   var timeMain = 110;
-  var countersMap = {
-    'prepare': 10,
-    'workout': 20,
-    'resting': 5,
-    'cycles': 4,
-    'sets': 1,
-    'restSets': 0,
-    'cooldown': 0,
-  };
+  var countersMap = {};
 
-  var _mapToDisplay = {};
-
-    IntervalsApp({Key key, @required this.timeMain, @required this.countersMap}) : super(key: key);
+  IntervalsApp({Key key, @required this.timeMain, @required this.countersMap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+//    countersMap.forEach(printArray);
+//    print(countersMap);
 
-//    int setCount = _countersMap['sets'];
-//    int cycleCount = _countersMap['cycles'];
+    int setCount = countersMap['sets'];
+    int cycleCount = countersMap['cycles'];
 
-//    void iterateMapEntry(key, value) {
-//      _countersMap[key] = value;
-//      print('$key:$value');//string interpolation in action
-//
-//      switch (key){
-//        case 'prepare':
-////          for(int i=0; i< setCount; i++) {
-//            _mapToDisplay[key] = _countersMap[key];
-////          }
-//          break;
-//        case 'workout':
-//          for(int i=0; i< setCount; i++) {
-//            for(int j = 0; j < cycleCount;)
-//            _mapToDisplay[key + i] = _countersMap[key];
-//          }
-//          break;
-//        case 'resting':
-//          for(int i=0; i< setCount-1; i++) {
-//            _mapToDisplay[key + i] = _countersMap[key];
-//          }
-//          break;
-//      }
-//
-//    }
+    int totalIntervals =
+        ((setCount * cycleCount) - 1) + (setCount * cycleCount) + 2;
 
-//    _countersMap.forEach(iterateMapEntry);
+    var _mapToDisplay = [];
+
+    for (int i = 1; i <= totalIntervals; i++) {
+      if (i == 1) {
+        _mapToDisplay.add({"prepare": countersMap["prepare"]});
+      } else if (i == totalIntervals) {
+        _mapToDisplay.add({"cooldown": countersMap["cooldown"]});
+      } else if (i % 2 == 0) {
+        _mapToDisplay.add({"workout": countersMap["workout"]});
+      } else if (i % 2 == 1) {
+        _mapToDisplay.add({"rest": countersMap["resting"]});
+      }
+    }
 
     return MaterialApp(
         theme: ThemeData(
@@ -73,6 +56,7 @@ class IntervalsApp extends StatelessWidget {
           ),
           body: TimerPage(
             timeTimerPage: timeMain,
+            workoutMap: _mapToDisplay,
           ),
         ));
   }
@@ -83,24 +67,37 @@ class IntervalsApp extends StatelessWidget {
 }
 
 class TimerPage extends StatefulWidget {
-
   int timeTimerPage;
+  var workoutMap = [];
 
-  TimerPage({Key key, @required this.timeTimerPage}) : super(key: key);
+  TimerPage({Key key, @required this.timeTimerPage, @required this.workoutMap})
+      : super(key: key);
 
   @override
-  TimerPageState createState() => new TimerPageState(totalTime: timeTimerPage, timeLeft: timeTimerPage);
+  TimerPageState createState() => new TimerPageState(
+      totalTime: timeTimerPage,
+      timeLeft: timeTimerPage,
+      workoutMap: workoutMap,
+      uneditedMap: new List.from(workoutMap));
 }
 
 class TimerPageState extends State<TimerPage> {
   // Get the total count down value here
   var totalTime;
 
-  //This variable is updated on each tick of the timer by -1
+  // This variable is updated on each tick of the timer by -1
   var timeLeft;
 
-  TimerPageState({Key key, @required this.totalTime, @required this.timeLeft});
+  // Stores the list
+  var workoutMap = [];
+  var uneditedMap = [];
 
+  TimerPageState(
+      {Key key,
+      @required this.totalTime,
+      @required this.timeLeft,
+      @required this.workoutMap,
+      @required this.uneditedMap});
 
   StreamSubscription periodicSub;
 
@@ -148,10 +145,15 @@ class TimerPageState extends State<TimerPage> {
                 CircularGradientButton(
                   child: Icon(Icons.refresh, size: 25.0),
                   callback: () {
-                    this.setState((){
-
+                    this.setState(() {
                       timeLeft = totalTime;
+                      for(int i=0; i<uneditedMap.length; i++){
+                        workoutMap[i] = uneditedMap[i];
+                      }
                     });
+//                    print("CHECK UNEDITED"+ uneditedMap.toString());
+//                    print("CHECK: " + workoutMap.toString());
+//                    return new IntervalsApp(timeMain: totalTime, countersMap: uneditedMap);
                   },
                   gradient: Gradients.hotLinear,
                 ),
@@ -173,15 +175,12 @@ class TimerPageState extends State<TimerPage> {
                                 (count) => this.setState(() {
                                       timeLeft--;
                                       for (int i = 0;
-                                          i < MakeListState.test.length;
+                                          i < workoutMap.length;
                                           i++) {
-                                        if (MakeListState.test[i].values.first >
-                                            0) {
-                                          MakeListState.test[i] = {
-                                            MakeListState.test[i].keys.first:
-                                                MakeListState
-                                                        .test[i].values.first -
-                                                    1
+                                        if (workoutMap[i].values.first > 0) {
+                                          workoutMap[i] = {
+                                            workoutMap[i].keys.first:
+                                                workoutMap[i].values.first - 1
                                           };
                                           return;
                                         }
@@ -213,17 +212,21 @@ class TimerPageState extends State<TimerPage> {
 
   Widget _row3() {
     return Expanded(
-      child: MakeList(),
+      child: MakeList(workoutMap: workoutMap),
     );
   }
 }
 
 class MakeList extends StatefulWidget {
+  final workoutMap;
+
   static MakeListState of(BuildContext context) =>
       context.ancestorStateOfType(const TypeMatcher<MakeListState>());
 
+  MakeList({Key key, @required this.workoutMap});
+
   @override
-  MakeListState createState() => new MakeListState();
+  MakeListState createState() => new MakeListState(workoutMap: workoutMap);
 }
 
 class MakeListState extends State<MakeList> {
@@ -234,6 +237,8 @@ class MakeListState extends State<MakeList> {
   var _rowHeight = 75.0;
   var _textStyle = TextStyle(fontSize: 20.0, color: Color(0xFF000000));
   var _textStyle2 = TextStyle(fontSize: 20.0, color: Color(0xFFFEAF83));
+
+  var workoutMap;
 
   static var test = [
     {"Workout": 5},
@@ -257,12 +262,16 @@ class MakeListState extends State<MakeList> {
     "SHIT"
   ];
 
+  MakeListState({Key key, @required this.workoutMap});
+
   @override
   Widget build(BuildContext context) {
+    print("level 3:" + workoutMap.toString());
+
     return ListView.builder(
 //      padding: EdgeInsets.all(8.0),
       itemBuilder: (context, i) {
-        if (i >= test.length * 2) {
+        if (i >= workoutMap.length * 2) {
           return null;
         }
         if (i.isOdd) {
@@ -270,8 +279,8 @@ class MakeListState extends State<MakeList> {
           return Divider();
         }
 
-        return _singleRow(test[(i / 2).round()].keys.first, (i / 2).round(),
-            test[(i / 2).round()].values.first);
+        return _singleRow(workoutMap[(i / 2).round()].keys.first,
+            (i / 2).round(), workoutMap[(i / 2).round()].values.first);
       },
     );
   }
