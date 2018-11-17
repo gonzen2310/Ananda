@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import './Intervals.dart';
 
+
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Ananda Timer',
       theme: new ThemeData(
+        primarySwatch: Colors.deepOrange,
         primaryColor: Color.fromRGBO(254, 175, 131, 1.0),
         primaryColorDark: Colors.deepOrange,
       ),
@@ -29,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _totalTime = 0;
   final myController = TextEditingController();
 
 
@@ -37,34 +38,57 @@ class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
-  // Counters
-  var _countersMap = {
-    'prepare': 0,
-    'workout': 0,
-    'resting': 0,
-    'cycles': 0,
-    'sets': 0,
+  // default value Counters
+  static var _countersMap = {
+    'prepare': 10,
+    'workout': 20,
+    'resting': 5,
+    'cycles': 4,
+    'sets': 1,
     'restSets': 0,
     'cooldown': 0,
   };
 
+
+  static int _getTotalTime() {
+    return _countersMap['sets'] * (_countersMap['prepare'] + (_countersMap['workout'] * _countersMap['cycles']) + (_countersMap['resting'] * (_countersMap['cycles'] - 1)));
+  }
+
+  int _totalTime = _getTotalTime();
 
 
   void _incrementCounter(String keyMap) {
     setState(() {
       _countersMap[keyMap]++;
 
-      _totalTime = _countersMap[keyMap];
+      _totalTime =  _getTotalTime();
+    });
+  }
+
+  void _resetValues() {
+    setState(() {
+      _countersMap = {
+        'prepare': 10,
+        'workout': 20,
+        'resting': 5,
+        'cycles': 4,
+        'sets': 1,
+        'restSets': 0,
+        'cooldown': 0,
+      };
+      _totalTime = _getTotalTime();
     });
   }
 
   void _decrementCounter(String keyMap) {
     setState(() {
       _countersMap[keyMap]--;
+      _totalTime = _getTotalTime();
     });
     if (_countersMap[keyMap] < 0) {
       setState(() {
         _countersMap[keyMap] = 0;
+        _totalTime = _getTotalTime();
       });
     }
   }
@@ -260,13 +284,17 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.list, color: Colors.white,),
             onPressed: _pushSaved,
+          ),
+          IconButton(
+            icon: Icon(Icons.refresh, color: Colors.white,),
+            onPressed: _resetValues,
           )
         ],
       ),
       body: new Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
