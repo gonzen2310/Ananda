@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'dart:async';
-import 'dart:collection';
 
 class IntervalsApp extends StatelessWidget {
-
   final int todo;
 
   IntervalsApp({Key key, @required this.todo}) : super(key: key);

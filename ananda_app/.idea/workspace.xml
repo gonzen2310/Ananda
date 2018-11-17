@@ -23,15 +23,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="-6773">
+              <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+=======
 <<<<<<< HEAD
             <state>
               <caret line="144" column="10" selection-start-line="144" selection-start-column="10" selection-end-line="144" selection-end-column="10" />
 =======
             <state relative-caret-position="275">
               <caret line="344" column="89" selection-start-line="344" selection-start-column="89" selection-end-line="344" selection-end-column="89" />
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -39,12 +44,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Intervals.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Intervals.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/Intervals.dart">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="308">
+              <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-end-line="12" />
+=======
             <state relative-caret-position="224">
               <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
 >>>>>>> e740b4d317a77dd6f6d87e20cca362d9992bf798
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -76,6 +86,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>CFBundleN</find>
+      <find>hello</find>
+      <find>time:</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -85,8 +97,8 @@
         <option value="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/ios/Runner/Info.plist" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/Intervals.dart" />
+        <option value="$PROJECT_DIR$/lib/main.dart" />
       </list>
     </option>
   </component>
@@ -100,6 +112,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
       <pane id="Scope" />
@@ -129,6 +143,7 @@
           <select />
         </subPane>
       </pane>
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -170,6 +185,23 @@
             </path>
 =======
 >>>>>>> e740b4d317a77dd6f6d87e20cca362d9992bf798
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ananda_app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ananda_app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ananda_app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ananda_app" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -288,8 +320,12 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32890365" />
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.32890365" />
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Run" order="2" weight="0.47951272" />
+=======
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47951272" />
 >>>>>>> e740b4d317a77dd6f6d87e20cca362d9992bf798
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32890365" />
       <window_info anchor="right" id="Flutter Outline" order="5" sideWeight="0.4994463" weight="0.32995737" />
@@ -298,10 +334,14 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
 <<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+=======
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49891067" visible="true" weight="0.0" />
       <window_info id="Structure" order="1" sideWeight="0.50108933" side_tool="true" weight="0.16044776" />
 =======
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
 >>>>>>> e740b4d317a77dd6f6d87e20cca362d9992bf798
       <window_info anchor="right" id="Device File Explorer" order="6" sideWeight="0.17054264" side_tool="true" weight="0.26119402" />
@@ -341,8 +381,13 @@
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+        <state relative-caret-position="9576">
+          <caret line="344" column="83" selection-start-line="344" selection-start-column="83" selection-end-line="344" selection-end-column="83" />
+=======
+<<<<<<< HEAD
         <state relative-caret-position="2822">
           <caret line="166" column="54" selection-start-line="166" selection-start-column="54" selection-end-line="166" selection-end-column="54" />
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -351,6 +396,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/Intervals.dart">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="112">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+=======
         <state relative-caret-position="391">
           <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
           <folding>
@@ -383,6 +432,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2805">
           <caret line="166" column="54" selection-start-line="166" selection-start-column="54" selection-end-line="166" selection-end-column="54" />
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -391,16 +441,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="420">
+=======
         <state relative-caret-position="255">
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
           <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+=======
         <state relative-caret-position="4704">
           <caret line="168" column="24" lean-forward="true" selection-start-line="168" selection-end-line="169" />
 =======
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
         <state relative-caret-position="9072">
           <caret line="324" column="48" lean-forward="true" selection-start-line="324" selection-start-column="48" selection-end-line="324" selection-end-column="48" />
 >>>>>>> e740b4d317a77dd6f6d87e20cca362d9992bf798
@@ -581,21 +638,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/main.dart">
+    <entry file="file://$PROJECT_DIR$/lib/Intervals.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="344" column="89" selection-start-line="344" selection-start-column="89" selection-end-line="344" selection-end-column="89" />
+        <state relative-caret-position="308">
+          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-end-line="12" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/Intervals.dart">
+    <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="-6773">
+          <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+=======
         <state relative-caret-position="224">
           <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
 >>>>>>> e740b4d317a77dd6f6d87e20cca362d9992bf798
+>>>>>>> 8a6e1425be408214df2c3103ae07bcf09067c865
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
