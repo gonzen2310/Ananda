@@ -160,7 +160,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                          pair['title']
+                        pair['title'],
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromRGBO(138, 138, 138, 1.0),
+                        ),
                       ),
                       Row(
                         children: <Widget>[
@@ -168,13 +173,20 @@ class _MyHomePageState extends State<MyHomePage> {
                             margin: const EdgeInsets.only(right: 16.0),
                             child: CircularGradientButton(
                               child: Icon(Icons.delete),
-                              callback: (){},
+                              callback: (){
+                                _savedWorkouts.remove(pair);
+                              },
                               gradient: Gradients.hotLinear,
                             ),
                           ),
                           CircularGradientButton(
                             child: Icon(Icons.play_arrow),
-                            callback: (){},
+                            callback: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => IntervalsApp(timeMain: pair['totalTime'],  countersMap: pair,)),
+                              );
+                            },
                             gradient: Gradients.rainbowBlue,
                           )
                         ],
@@ -254,6 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pop();
                 var copyStats = {
                   'title': workoutTitle,
+                  'totalTime': _totalTime,
                   'prepare': _countersMap['prepare'],
                   'workout': _countersMap['workout'],
                   'resting': _countersMap['resting'],
@@ -299,7 +312,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
