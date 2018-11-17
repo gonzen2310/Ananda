@@ -3,12 +3,54 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'dart:async';
 
 class IntervalsApp extends StatelessWidget {
-  final int todo;
+  var timeMain = 110;
+  var countersMap = {
+    'prepare': 10,
+    'workout': 20,
+    'resting': 5,
+    'cycles': 4,
+    'sets': 1,
+    'restSets': 0,
+    'cooldown': 0,
+  };
 
-  IntervalsApp({Key key, @required this.todo}) : super(key: key);
+  var _mapToDisplay = {};
+
+    IntervalsApp({Key key, @required this.timeMain, this.countersMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+//    int setCount = _countersMap['sets'];
+//    int cycleCount = _countersMap['cycles'];
+
+//    void iterateMapEntry(key, value) {
+//      _countersMap[key] = value;
+//      print('$key:$value');//string interpolation in action
+//
+//      switch (key){
+//        case 'prepare':
+////          for(int i=0; i< setCount; i++) {
+//            _mapToDisplay[key] = _countersMap[key];
+////          }
+//          break;
+//        case 'workout':
+//          for(int i=0; i< setCount; i++) {
+//            for(int j = 0; j < cycleCount;)
+//            _mapToDisplay[key + i] = _countersMap[key];
+//          }
+//          break;
+//        case 'resting':
+//          for(int i=0; i< setCount-1; i++) {
+//            _mapToDisplay[key + i] = _countersMap[key];
+//          }
+//          break;
+//      }
+//
+//    }
+
+//    _countersMap.forEach(iterateMapEntry);
+
     return MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,
@@ -29,7 +71,9 @@ class IntervalsApp extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
           ),
-          body: TimerPage(),
+          body: TimerPage(
+            timeTimerPage: timeMain,
+          ),
         ));
   }
 
@@ -39,16 +83,24 @@ class IntervalsApp extends StatelessWidget {
 }
 
 class TimerPage extends StatefulWidget {
+
+  int timeTimerPage;
+
+  TimerPage({Key key, @required this.timeTimerPage}) : super(key: key);
+
   @override
-  TimerPageState createState() => new TimerPageState();
+  TimerPageState createState() => new TimerPageState(totalTime: timeTimerPage, timeLeft: timeTimerPage);
 }
 
 class TimerPageState extends State<TimerPage> {
   // Get the total count down value here
-  var totalTime = 100;
+  var totalTime;
 
   //This variable is updated on each tick of the timer by -1
-  var timeLeft = 100;
+  var timeLeft;
+
+  TimerPageState({Key key, @required this.totalTime, @required this.timeLeft});
+
 
   StreamSubscription periodicSub;
 
@@ -84,7 +136,7 @@ class TimerPageState extends State<TimerPage> {
                     style: _textStyleTimeLeftTextView,
                   ),
                   Text(
-                    "100 secs",
+                    totalTime.toString(),
                     style: _textStyleTimeLeftValue,
                   ),
                 ],
@@ -98,7 +150,7 @@ class TimerPageState extends State<TimerPage> {
                   callback: () {
                     this.setState((){
 
-                      timeLeft = 100;
+                      timeLeft = totalTime;
                     });
                   },
                   gradient: Gradients.hotLinear,
@@ -181,7 +233,7 @@ class MakeListState extends State<MakeList> {
 
   var _rowHeight = 75.0;
   var _textStyle = TextStyle(fontSize: 20.0, color: Color(0xFF000000));
-  var _indexStyle = TextStyle(fontSize: 20.0, color: Color(0xFFFEAF83));
+  var _textStyle2 = TextStyle(fontSize: 20.0, color: Color(0xFFFEAF83));
 
   static var test = [
     {"Workout": 5},
@@ -241,7 +293,7 @@ class MakeListState extends State<MakeList> {
                     padding: EdgeInsets.all(16.0),
                     child: Text(
                       ((index + 1).toString() + "."),
-                      style: _indexStyle,
+                      style: _textStyle2,
                     )),
                 Expanded(
                   child: Padding(
