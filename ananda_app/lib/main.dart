@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final myController = TextEditingController();
 
+  String workoutTitle;
 
   final List<Map>_savedWorkouts = new List<Map>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -159,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                          "WORKOUT"
+                          pair['title']
                       ),
                       Row(
                         children: <Widget>[
@@ -249,8 +250,10 @@ class _MyHomePageState extends State<MyHomePage> {
             new FlatButton(
               child: new Text("Save"),
               onPressed: () {
+                workoutTitle = myController.text.toString();
                 Navigator.of(context).pop();
                 var copyStats = {
+                  'title': workoutTitle,
                   'prepare': _countersMap['prepare'],
                   'workout': _countersMap['workout'],
                   'resting': _countersMap['resting'],
@@ -260,6 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'cooldown': _countersMap['cooldown'],
                 };
                 _savedWorkouts.add(copyStats);
+                myController.clear();
                 _showSnackbar();
               },
             ),
@@ -349,18 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Icon(Icons.favorite),
                           callback: (){
                             _showDialog();
-//                            var copyStats = {
-//                              'prepare': _countersMap['prepare'],
-//                              'workout': _countersMap['workout'],
-//                              'resting': _countersMap['resting'],
-//                              'cycles': _countersMap['cycles'],
-//                              'sets': _countersMap['sets'],
-//                              'restSets': _countersMap['restSets'],
-//                              'cooldown': _countersMap['cooldown'],
-//                            };
-//                            _savedWorkouts.add(copyStats);
-//                            _showSnackbar();
-                          },
+                            },
                           gradient: Gradients.hotLinear,
                         ),
                       ),
@@ -370,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           callback: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => IntervalsApp()),
+                              MaterialPageRoute(builder: (context) => IntervalsApp(timeMain: _totalTime,  countersMap: _countersMap,)),
                             );
                           },
                           gradient: Gradients.hotLinear,

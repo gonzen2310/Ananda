@@ -16,7 +16,7 @@ class IntervalsApp extends StatelessWidget {
 
   var _mapToDisplay = {};
 
-    IntervalsApp({Key key, @required this.timeMain, this.countersMap}) : super(key: key);
+    IntervalsApp({Key key, @required this.timeMain, @required this.countersMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
