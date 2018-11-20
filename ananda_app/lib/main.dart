@@ -104,9 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Text(title,
                   style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(113, 113, 113, 1.0),
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromRGBO(113, 113, 113, 1.0),
                   ),
                 ),
               ),
@@ -251,8 +251,8 @@ class _MyHomePageState extends State<MyHomePage> {
           content: TextField(
             controller: myController,
             decoration: InputDecoration(
-                  hintText: 'e.g. Workout 1',
-                  icon: Icon(Icons.directions_run)
+                hintText: 'e.g. Workout 1',
+                icon: Icon(Icons.directions_run)
             ),
             maxLength: 24,
             maxLines: 1,
@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: new Text(widget.title, style: TextStyle(
             color: Colors.white
-          ),
+        ),
         ),
         actions: <Widget>[
           IconButton(
@@ -322,9 +322,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           Text("Time: ",
                             style: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromRGBO(255, 128, 58, 1.0),
-                              fontWeight: FontWeight.w500
+                                fontSize: 20.0,
+                                color: Color.fromRGBO(255, 128, 58, 1.0),
+                                fontWeight: FontWeight.w500
                             ),
                           ),
 
@@ -333,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontSize: 20.0,
                                 color: Color.fromRGBO(138, 138, 138, 1.0),
                                 fontWeight: FontWeight.w500
-                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -341,9 +341,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           Text("Intervals: ",
                             style: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromRGBO(255, 128, 58, 1.0),
-                              fontWeight: FontWeight.w500
+                                fontSize: 20.0,
+                                color: Color.fromRGBO(255, 128, 58, 1.0),
+                                fontWeight: FontWeight.w500
                             ),
                           ),
                           Text("2",
@@ -365,7 +365,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Icon(Icons.favorite),
                           callback: (){
                             _showDialog();
-                            },
+                          },
                           gradient: Gradients.hotLinear,
                         ),
                       ),
