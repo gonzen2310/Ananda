@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import './Intervals.dart';
 
 
@@ -34,6 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final myController = TextEditingController();
 
   String workoutTitle;
+
+  var strList = List<String>();
 
   final List<Map>_savedWorkouts = new List<Map>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -92,6 +96,12 @@ class _MyHomePageState extends State<MyHomePage> {
         _totalTime = _getTotalTime();
       });
     }
+    if (_countersMap['prepare'] < 1) {
+      setState(() {
+        _countersMap['prepare'] = 1;
+        _totalTime = _getTotalTime();
+      });
+    }
   }
 
   // Create single tile
@@ -145,8 +155,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var savedWorks = prefs.getStringList('savedWorks');
+    print("HERE ARE YOUR SAVED WORKOUTS ");
+    savedWorks.forEach((element) => _savedWorkouts.add(json.decode(element)));
+  }
+
   // Go to new screen
   void _pushSaved() {
+    getData();
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -173,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             margin: const EdgeInsets.only(right: 16.0),
                             child: CircularGradientButton(
                               child: Icon(Icons.delete),
-                              callback: (){
+                              callback: () async {
                                 _savedWorkouts.remove(pair);
                               },
                               gradient: Gradients.hotLinear,
@@ -261,7 +279,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // usually buttons at the bottom of the dialog
             new FlatButton(
               child: new Text("Save"),
-              onPressed: () {
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
                 workoutTitle = myController.text.toString();
                 Navigator.of(context).pop();
                 var copyStats = {
@@ -275,7 +294,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   'restSets': _countersMap['restSets'],
                   'cooldown': _countersMap['cooldown'],
                 };
-                _savedWorkouts.add(copyStats);
+                String jsonMap = json.encode(copyStats);
+                strList.add(jsonMap);
+                //prefs.setString('testHash', jsonMap);
+
+                prefs.setStringList('savedWorks', strList);
+                //_savedWorkouts.add(map);
+                //print("saved");
+
+                //_savedWorkouts.add(copyStats);
                 myController.clear();
                 _showSnackbar();
               },
