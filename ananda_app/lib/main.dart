@@ -47,13 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadWorkouts();
   }
 
-  _loadWorkouts() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      strListWorkouts = prefs.getStringList('savedWorks');
-    });
-    print(strListWorkouts);
-  }
   // default value Counters
   static var _countersMap = {
     'prepare': 10,
@@ -63,6 +56,29 @@ class _MyHomePageState extends State<MyHomePage> {
     'sets': 1,
     'cooldown': 0,
   };
+
+  var defaultWork = {
+    'title': 'Default Work',
+    'totalTime': 105,
+    'prepare': 10,
+    'workout': 20,
+    'resting': 5,
+    'cycles': 4,
+    'sets':1,
+    'cooldown': 0,
+  };
+
+  var tempList = List<String>();
+
+
+  _loadWorkouts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      if (prefs.getStringList('savedWorks') != null)  strListWorkouts = prefs.getStringList('savedWorks');
+      else strListWorkouts.add(json.encode(defaultWork));
+    });
+  }
+
 
 
   static int _getTotalTime() {
@@ -168,7 +184,6 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var savedWorks = prefs.getStringList('savedWorks');
 
-    print("HERE ARE YOUR SAVED WORKOUTS ");
     if(_savedWorkouts.isEmpty) {
       savedWorks.forEach((element) => _savedWorkouts.add(json.decode(element)));
     }
@@ -321,7 +336,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 strListWorkouts.add(jsonMap);
                 var temp = strListWorkouts;
                 prefs.setStringList('savedWorks', temp);
-                print(prefs.getStringList('savedWorks'));
                 //_savedWorkouts.add(map);
                 //print("saved");
 
