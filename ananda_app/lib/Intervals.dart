@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:ananda_app/TimerPage/TimerPage.dart';
 
 class IntervalsApp extends StatelessWidget {
   var timeMain = 110;
   var countersMap = {};
+
+  static var volume = 1;
 
   IntervalsApp({Key key, @required this.timeMain, @required this.countersMap})
       : super(key: key);
@@ -25,12 +26,25 @@ class IntervalsApp extends StatelessWidget {
     );
   }
 
+  void _disableSound() {
+    print("SOUND DISABLED" + IntervalsApp.volume.toString());
+    IntervalsApp.volume == 1 ? IntervalsApp.volume = 0 : IntervalsApp.volume = 1;
+    print("SOUND DISABLED HERE" + IntervalsApp.volume.toString());
+  }
+
   AppBar myAppBar() {
     return AppBar(
       title: Text(
         "Ananda Timer",
         style: TextStyle(color: Colors.white),
       ),
+//      actions: <Widget>[
+//        IconButton(
+//          icon: Icon(Icons.volume_down),
+////          currentIcon== 0 ? (icon:play_arrow) : (Icons.pause),
+//          onPressed: _disableSound,
+//        ),
+//      ],
     );
   }
 
