@@ -33,16 +33,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final myController = TextEditingController();
-
   String workoutTitle;
-
-  var strList = List<String>();
-
-  final List<Map>_savedWorkouts = new List<Map>();
+  final myController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // Saved workouts
+  List<String>strListWorkouts = new List<String>();
+  List<Map>_savedWorkouts = new List<Map>();
 
+  @override
+  void initState() {
+    super.initState();
+    _loadWorkouts();
+  }
+
+  _loadWorkouts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      strListWorkouts = prefs.getStringList('savedWorks');
+    });
+    print(strListWorkouts);
+  }
   // default value Counters
   static var _countersMap = {
     'prepare': 10,
@@ -50,13 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
     'resting': 5,
     'cycles': 4,
     'sets': 1,
-    'restSets': 0,
     'cooldown': 0,
   };
 
 
   static int _getTotalTime() {
-    return _countersMap['sets'] * (_countersMap['prepare'] + (_countersMap['workout'] * _countersMap['cycles']) + (_countersMap['resting'] * (_countersMap['cycles'] - 1)));
+    return _countersMap['cooldown'] + (_countersMap['sets'] * (_countersMap['prepare'] + (_countersMap['workout'] * _countersMap['cycles']) + (_countersMap['resting'] * (_countersMap['cycles'] - 1))));
   }
 
   int _totalTime = _getTotalTime();
@@ -78,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
         'resting': 5,
         'cycles': 4,
         'sets': 1,
-        'restSets': 0,
         'cooldown': 0,
       };
       _totalTime = _getTotalTime();
@@ -158,8 +167,15 @@ class _MyHomePageState extends State<MyHomePage> {
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var savedWorks = prefs.getStringList('savedWorks');
+
     print("HERE ARE YOUR SAVED WORKOUTS ");
-    savedWorks.forEach((element) => _savedWorkouts.add(json.decode(element)));
+    if(_savedWorkouts.isEmpty) {
+      savedWorks.forEach((element) => _savedWorkouts.add(json.decode(element)));
+    }
+    else {
+      savedWorks.clear();
+      savedWorks.forEach((element) => _savedWorkouts.add(json.decode(element)));
+    }
   }
 
   // Go to new screen
@@ -192,7 +208,15 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: CircularGradientButton(
                               child: Icon(Icons.delete),
                               callback: () async {
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.getStringList('savedWorks');
+
                                 _savedWorkouts.remove(pair);
+                                strListWorkouts.clear();
+                                _savedWorkouts.forEach((element) => strListWorkouts.add(json.encode(element)));
+                                prefs.setStringList('savedWorks', strListWorkouts);
+                                Navigator.pop(context);
+                                _showSnackbar("Workout deleted");
                               },
                               gradient: Gradients.hotLinear,
                             ),
@@ -235,11 +259,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _showSnackbar() {
+  _showSnackbar(text) {
     final snackBar = SnackBar(
       content: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text("Workout Saved",
+        child: Text(text,
           style: TextStyle(color: Color.fromRGBO(254, 175, 131, 1.0),
           ),
         ),
@@ -291,20 +315,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   'resting': _countersMap['resting'],
                   'cycles': _countersMap['cycles'],
                   'sets': _countersMap['sets'],
-                  'restSets': _countersMap['restSets'],
                   'cooldown': _countersMap['cooldown'],
                 };
                 String jsonMap = json.encode(copyStats);
-                strList.add(jsonMap);
-                //prefs.setString('testHash', jsonMap);
-
-                prefs.setStringList('savedWorks', strList);
+                strListWorkouts.add(jsonMap);
+                var temp = strListWorkouts;
+                prefs.setStringList('savedWorks', temp);
+                print(prefs.getStringList('savedWorks'));
                 //_savedWorkouts.add(map);
                 //print("saved");
 
                 //_savedWorkouts.add(copyStats);
                 myController.clear();
-                _showSnackbar();
+                _showSnackbar("Workout Saved");
               },
             ),
           ],
@@ -444,14 +467,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       /*********************************
                        *  SETS TILE
                        **********************************/
-                      rowTile('sets', 'sets'),
+                      rowTile('sets', 'Sets'),
                       Divider(),
 
                       /*********************************
                        *  REST / SETS TILE
                        **********************************/
-                      rowTile('restSets', 'Rest / Set'),
-                      Divider(),
+                      //('restSets', 'Rest / Set'),
+                      //Divider(),
 
                       /*********************************
                        *  COOL DOWN TILE
