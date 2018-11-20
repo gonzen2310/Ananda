@@ -41,7 +41,7 @@ class TimerPageState extends State<TimerPage> {
   Widget build(BuildContext context) {
     //Sound for life
     if (timeToDisplay.toString() == "0") {
-//      player.play(alarmAudioPath);
+      player.play(alarmAudioPath);
       showTextTimer = new Stream.periodic(const Duration(seconds: 1), (v) => v)
           .take(1)
           .listen((count) => this.setState(() {
