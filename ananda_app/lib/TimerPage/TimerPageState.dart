@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ananda_app/TimerPage/TimerPage.dart';
 import '../MakeList/MakeList.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 class TimerPageState extends State<TimerPage> {
   var currentIcon = 0;
   var _textStyleTimeLeftTextView =
       TextStyle(fontSize: 18.0, color: Color(0xFFFF803A));
   var _textStyleTimeLeftValue =
-      TextStyle(fontSize: 18.0, color: Color(0xFF000000));
-  var _countDownTextValue =
-      TextStyle(fontSize: 150.0, color: Colors.red);
+      TextStyle(fontSize: 18.0, color: Colors.black);
+  var _countDownTextValue = TextStyle(fontSize: 80.0, color: Colors.red);
   int prepareTime = 0;
   var totalTime;
   var timeLeft;
@@ -19,9 +19,12 @@ class TimerPageState extends State<TimerPage> {
   var uneditedMap = [];
   StreamSubscription periodicSub;
   StreamSubscription periodicSub2;
+  StreamSubscription showTextTimer;
   var currentPointer = 0;
   var timeToDisplay;
   var currentActivity;
+  static AudioCache player = new AudioCache();
+  static const alarmAudioPath = "beep-09.mp3";
 
   TimerPageState(
       {Key key,
@@ -36,6 +39,25 @@ class TimerPageState extends State<TimerPage> {
 
   @override
   Widget build(BuildContext context) {
+    //Sound for life
+    if (timeToDisplay.toString() == "0") {
+//      player.play(alarmAudioPath);
+      showTextTimer = new Stream.periodic(const Duration(seconds: 1), (v) => v)
+          .take(1)
+          .listen((count) => this.setState(() {
+                print("HERE IS " + currentActivity);
+                timeToDisplay = currentActivity
+                    .toString()
+                    .replaceAll(new RegExp(r"[0-9]"), "");
+                _countDownTextValue =
+                    TextStyle(fontSize: 70.0, color: Colors.red);
+              }));
+    } else {
+      _countDownTextValue =
+          TextStyle(fontSize: 70.0, color: Colors.red);
+    }
+
+    if (timeToDisplay == 0) {}
     return Container(
       child: Column(
         children: <Widget>[_row1(context), _row2(), _row3()],
@@ -117,18 +139,17 @@ class TimerPageState extends State<TimerPage> {
   void _button2Click() {
     this.setState(
       () {
-
         if (currentIcon == 0) {
           currentIcon = 1;
-          periodicSub2 = new Stream.periodic(const Duration(seconds: 1), (v) => v)
-          .take(totalTime).listen((count) => this.setState(
-              () {
-                if(prepareTime == 0)
-                  _countDownTextValue =  TextStyle(fontSize: 150.0, color: Color(0xFF717171));
-                prepareTime--;
-              }
-          ));
-
+          periodicSub2 = new Stream.periodic(
+                  const Duration(seconds: 1), (v) => v)
+              .take(totalTime)
+              .listen((count) => this.setState(() {
+                    if (prepareTime == 0)
+                      _countDownTextValue =
+                          TextStyle(fontSize: 150.0, color: Color(0xFF717171));
+                    prepareTime--;
+                  }));
 
           periodicSub =
               new Stream.periodic(const Duration(seconds: 1), (v) => v)
@@ -159,17 +180,20 @@ class TimerPageState extends State<TimerPage> {
           periodicSub.cancel();
           periodicSub2.cancel();
         }
-
       },
     );
   }
 
   Widget _row2() {
-    return Center(
+    return Container(
+      height: 200.0,
+      child: Center(
         child: Text(
-      timeToDisplay.toString(),
-      style: _countDownTextValue,
-    ));
+          timeToDisplay.toString(),
+          style: _countDownTextValue,
+        ),
+      ),
+    );
   }
 
   Widget _row3() {
