@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:ananda_app/TimerPage/TimerPage.dart';
 import '../MakeList/MakeList.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:ananda_app/Intervals.dart';
 
 class TimerPageState extends State<TimerPage> {
   var currentIcon = 0;
   var _textStyleTimeLeftTextView =
-      TextStyle(fontSize: 18.0, color: Color(0xFFFF803A));
+  TextStyle(fontSize: 18.0, color: Color(0xFFFF803A));
   var _textStyleTimeLeftValue =
-      TextStyle(fontSize: 18.0, color: Colors.black);
+  TextStyle(fontSize: 18.0, color: Colors.black);
   var _countDownTextValue = TextStyle(fontSize: 80.0, color: Colors.red);
   int prepareTime = 0;
   var totalTime;
@@ -24,14 +25,13 @@ class TimerPageState extends State<TimerPage> {
   var timeToDisplay;
   var currentActivity;
   static AudioCache player = new AudioCache();
-  static const alarmAudioPath = "beep-09.mp3";
+  static var alarmAudioPath = "beep-09.mp3";
 
-  TimerPageState(
-      {Key key,
-      @required this.totalTime,
-      @required this.timeLeft,
-      @required this.workoutMap,
-      @required this.uneditedMap}) {
+  TimerPageState({Key key,
+    @required this.totalTime,
+    @required this.timeLeft,
+    @required this.workoutMap,
+    @required this.uneditedMap}) {
     timeToDisplay = workoutMap[0].values.first.toString();
     currentActivity = workoutMap[0].keys.first.toString();
     prepareTime = int.parse(workoutMap[0].values.first.toString());
@@ -41,27 +41,47 @@ class TimerPageState extends State<TimerPage> {
   Widget build(BuildContext context) {
     //Sound for life
     if (timeToDisplay.toString() == "0") {
+      print("INTERVAL VALUE = " + IntervalsApp.volume.toString());
+      if (IntervalsApp.volume == 1){
       player.play(alarmAudioPath);
-      showTextTimer = new Stream.periodic(const Duration(seconds: 1), (v) => v)
-          .take(1)
-          .listen((count) => this.setState(() {
-                print("HERE IS " + currentActivity);
-                timeToDisplay = currentActivity
-                    .toString()
-                    .replaceAll(new RegExp(r"[0-9]"), "");
-                _countDownTextValue =
-                    TextStyle(fontSize: 70.0, color: Colors.red);
-              }));
-    } else {
-      _countDownTextValue =
-          TextStyle(fontSize: 70.0, color: Colors.red);
+      }
+      showTextTimer = new Stream.periodic(const Duration(seconds: 1)
+    ,
+    (v) => v)
+        .take(1
+    )
+        .listen((count) => this.
+    setState(()
+    {
+    print("HERE IS " + currentActivity);
+    timeToDisplay = currentActivity
+        .toString()
+        .replaceAll(new RegExp(r"[0-9]"), "");
+    _countDownTextValue =
+    TextStyle(fontSize: 70.0, color: Colors.red);
+    }
+    ));
+    } else
+    {
+    _countDownTextValue =
+    TextStyle(fontSize: 70.0, color: Colors.red);
     }
 
-    if (timeToDisplay == 0) {}
+    if (timeToDisplay == 0)
+    {}
     return Container(
-      child: Column(
-        children: <Widget>[_row1(context), _row2(), _row3()],
-      ),
+    child: Column(
+    children: <
+    Widget>[_row1(context), _row2(
+    )
+    ,
+    _row3
+    (
+    )
+    ]
+    ,
+    )
+    ,
     );
   }
 
@@ -138,43 +158,45 @@ class TimerPageState extends State<TimerPage> {
 
   void _button2Click() {
     this.setState(
-      () {
+          () {
         if (currentIcon == 0) {
           currentIcon = 1;
           periodicSub2 = new Stream.periodic(
-                  const Duration(seconds: 1), (v) => v)
+              const Duration(seconds: 1), (v) => v)
               .take(totalTime)
-              .listen((count) => this.setState(() {
-                    if (prepareTime == 0)
-                      _countDownTextValue =
-                          TextStyle(fontSize: 150.0, color: Color(0xFF717171));
-                    prepareTime--;
-                  }));
+              .listen((count) =>
+              this.setState(() {
+                if (prepareTime == 0)
+                  _countDownTextValue =
+                      TextStyle(fontSize: 150.0, color: Color(0xFF717171));
+                prepareTime--;
+              }));
 
           periodicSub =
               new Stream.periodic(const Duration(seconds: 1), (v) => v)
                   .take(totalTime)
                   .listen(
-                    (count) => this.setState(
+                    (count) =>
+                    this.setState(
                           () {
-                            timeLeft--;
-                            for (int i = 0; i < workoutMap.length; i++) {
-                              timeToDisplay =
-                                  (workoutMap[i].values.first - 1).toString();
-                              if (workoutMap[i].values.first > 0) {
+                        timeLeft--;
+                        for (int i = 0; i < workoutMap.length; i++) {
+                          timeToDisplay =
+                              (workoutMap[i].values.first - 1).toString();
+                          if (workoutMap[i].values.first > 0) {
 //                          print(workoutMap[i].keys.first.toString());  /// / // / / / / / // /
-                                currentActivity =
-                                    workoutMap[i].keys.first.toString();
-                                workoutMap[i] = {
-                                  workoutMap[i].keys.first:
-                                      workoutMap[i].values.first - 1
-                                };
-                                return;
-                              }
-                            }
-                          },
-                        ),
-                  );
+                            currentActivity =
+                                workoutMap[i].keys.first.toString();
+                            workoutMap[i] = {
+                              workoutMap[i].keys.first:
+                              workoutMap[i].values.first - 1
+                            };
+                            return;
+                          }
+                        }
+                      },
+                    ),
+              );
         } else {
           currentIcon = 0;
           periodicSub.cancel();
